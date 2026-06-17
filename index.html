@@ -86,7 +86,20 @@
         strong { font-weight: 400; }
 
         /* Cover slide */
-        .slide.cover { background: #1a1a1a; text-align: center; align-items: center; }
+        .slide.cover {
+            background: #1a1a1a url('images/cover_hero.jpg') center center / cover no-repeat;
+            text-align: center;
+            align-items: center;
+        }
+        /* Scrim overlay for title legibility over the photographic hero */
+        .slide.cover::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.35) 45%, rgba(10,10,10,0.72) 100%);
+            z-index: 0;
+        }
+        .slide.cover > * { position: relative; z-index: 1; }
         .slide.cover h1 {
             font-family: 'Cormorant Garamond', Georgia, serif;
             color: #fffff0;
@@ -94,9 +107,10 @@
             font-weight: 400;
             font-size: 5rem;
             letter-spacing: 6px;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.55);
+            text-shadow: 0 2px 18px rgba(0,0,0,0.7);
         }
-        .slide.cover .subtitle { color: #d4a574; }
+        .slide.cover .subtitle { color: #e8c79a; text-shadow: 0 1px 8px rgba(0,0,0,0.6); }
+        .slide.cover p { text-shadow: 0 1px 8px rgba(0,0,0,0.6); }
         .slide.cover .divider { margin-left: auto; margin-right: auto; }
         
         /* Navigation */
@@ -167,7 +181,7 @@
     <h1>ALBERTO MACCARI</h1>
     <p class="subtitle">Private Distortion • Abstract Geometry • Simultaneità Intima</p>
     <div class="divider"></div>
-    <p style="margin-top: 3rem; font-size: 1rem; color: #999;">La Frammentazione dello Spazio e della Percezione</p>
+    <p style="margin-top: 3rem; font-size: 1rem; color: #e6e3dd;">La Frammentazione dello Spazio e della Percezione</p>
 </div>
 
 <div class="slide">
