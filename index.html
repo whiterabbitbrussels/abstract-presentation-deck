@@ -117,6 +117,13 @@ body{font-family:'Archivo',Arial,'Helvetica Neue',Helvetica,sans-serif;backgroun
 .ptot b{font-weight:800;font-size:24px;color:var(--ink);letter-spacing:-.5px;}
 .ptot span{font:400 13px 'Archivo',Arial,sans-serif;color:#999;}
 .pfine{font:400 12.5px/1.5 'Archivo',Arial,sans-serif;color:#777;margin-top:14px;border-top:1px solid var(--line);padding-top:12px;max-width:1040px;}
+.pttl.acc{cursor:pointer;display:flex;align-items:center;}
+.pttl .chev{color:var(--orange);font-size:11px;margin-left:8px;transition:transform .2s;}
+.pttl .phead{margin-left:auto;font-weight:800;}
+.pttl.acc.open .chev{transform:rotate(90deg);}
+.pttl.acc .hint{margin-left:8px;font:400 11px 'Archivo',Arial,sans-serif;color:#aaa;letter-spacing:.3px;}
+.pbody{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.pbody.open{max-height:460px;}
 
 /* ---------- optional arrows ---------- */
 .arrows{display:flex;gap:24px;margin-top:34px;}
@@ -378,12 +385,13 @@ body{font-family:'Archivo',Arial,'Helvetica Neue',Helvetica,sans-serif;backgroun
           <div class="psub"><span>Subtotal</span><b>€18,000</b></div>
         </div>
         <div class="pcol">
-          <div class="pttl">Part 2: Website</div>
-          <div class="pitem"><div class="pr"><span>Design UI &middot; 80h</span><b>€6,800</b></div><div class="wbar"><i style="width:53%"></i></div></div>
-          <div class="pitem"><div class="pr"><span>Development &middot; 150h</span><b>€12,750</b></div><div class="wbar"><i style="width:100%"></i></div></div>
-          <div class="pitem"><div class="pr"><span>Content migration &middot; 80h</span><b>€6,800</b></div><div class="wbar"><i style="width:53%"></i></div></div>
-          <div class="pitem"><div class="pr"><span>Testing &amp; launch &middot; 40h</span><b>€3,400</b></div><div class="wbar"><i style="width:27%"></i></div></div>
-          <div class="psub"><span>Subtotal &middot; 350h at €85/h</span><b>€29,750</b></div>
+          <div class="pttl acc" tabindex="0">Part 2: Website<span class="chev">&#9656;</span><span class="hint">click to expand</span><span class="phead">€29,750</span></div>
+          <div class="pbody">
+          <div class="pitem"><div class="pr"><span>Design UI</span><b>€6,800</b></div><div class="wbar"><i style="width:53%"></i></div></div>
+          <div class="pitem"><div class="pr"><span>Development</span><b>€12,750</b></div><div class="wbar"><i style="width:100%"></i></div></div>
+          <div class="pitem"><div class="pr"><span>Content migration</span><b>€6,800</b></div><div class="wbar"><i style="width:53%"></i></div></div>
+          <div class="pitem"><div class="pr"><span>Testing &amp; launch</span><b>€3,400</b></div><div class="wbar"><i style="width:27%"></i></div></div>
+          </div>
         </div>
       </div>
       <div class="ptot">Total fixed fee <b>€47,750</b> <span>excl. VAT</span></div>
@@ -445,6 +453,7 @@ window.addEventListener('resize',fit);fit();
 const fill=document.getElementById('fill');
 function prog(){const hh=document.documentElement.scrollHeight-window.innerHeight;const p=hh>0?Math.min(window.scrollY/hh,1):0;fill.style.height=(p*100)+'%';}
 window.addEventListener('scroll',prog,{passive:true});prog();
+document.querySelectorAll('.pttl.acc').forEach(el=>{function t(){el.classList.toggle('open');var b=el.nextElementSibling;if(b&&b.classList.contains('pbody'))b.classList.toggle('open');}el.addEventListener('click',t);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();t();}});});
 </script>
 </body>
 </html>
