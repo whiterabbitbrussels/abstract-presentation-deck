@@ -2,6 +2,6 @@
   "version": 2,
   "builds": [
     { "src": "index.html", "use": "@vercel/static" },
-    { "src": "images/**", "use": "@vercel/static" }
+    { "src": "GPE_proposal.pdf", "use": "@vercel/static" }
   ]
 }
