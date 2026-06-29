@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alberto Maccari - Private Distortion, Abstract Geometry, Simultaneità Intima</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #faf9f7;
+            color: #2c2c2c;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+        
+        .slide {
+            display: none;
+            height: 100vh;
+            padding: 6rem 5rem;
+            background: #ffffff;
+            position: relative;
+            overflow: auto;
+        }
+        
+        .slide.active { display: flex; flex-direction: column; justify-content: center; }
+        .slide.bg-cream { background: #faf9f7; }
+        .slide.bg-dark { background: #2c2c2c; color: #ffffff; }
+        
+        h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+        
+        p {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            font-weight: 300;
+            letter-spacing: 1.5px;
+            color: #d4a574;
+            margin-bottom: 1rem;
+        }
+        
+        .divider {
+            width: 50px;
+            height: 1.5px;
+            background: #d4a574;
+            margin: 2rem 0;
+        }
+        
+        .image-frame {
+            border: 20px solid #1a1a1a;
+            max-width: 600px;
+            margin: 2rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .image-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        em { font-style: italic; color: #555; }
+        strong { font-weight: 400; }
+
+        /* Cover slide */
+        .slide.cover {
+            background: #1a1a1a url('images/cover_hero.jpg') center center / cover no-repeat;
+            text-align: center;
+            align-items: center;
+        }
+        /* Scrim overlay for title legibility over the photographic hero */
+        .slide.cover::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.35) 45%, rgba(10,10,10,0.72) 100%);
+            z-index: 0;
+        }
+        .slide.cover > * { position: relative; z-index: 1; }
+        .slide.cover h1 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            color: #fffff0;
+            text-align: center;
+            font-weight: 400;
+            font-size: 5rem;
+            letter-spacing: 6px;
+            text-shadow: 0 2px 18px rgba(0,0,0,0.7);
+        }
+        .slide.cover .subtitle { color: #e8c79a; text-shadow: 0 1px 8px rgba(0,0,0,0.6); }
+        .slide.cover p { text-shadow: 0 1px 8px rgba(0,0,0,0.6); }
+        .slide.cover .divider { margin-left: auto; margin-right: auto; }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+            z-index: 100;
+        }
+        
+        .nav button {
+            width: 44px;
+            height: 44px;
+            border: 1.5px solid #d4a574;
+            border-radius: 50%;
+            background: transparent;
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: #d4a574;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav button:hover:not(:disabled) {
+            background: #d4a574;
+            color: white;
+        }
+        
+        .nav button:disabled {
+            opacity: 0.2;
+            cursor: not-allowed;
+        }
+        
+        .counter {
+            font-size: 0.9rem;
+            color: #999;
+            letter-spacing: 1px;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .page-number {
+            position: fixed;
+            bottom: 2rem;
+            right: 3rem;
+            font-size: 0.85rem;
+            color: #999;
+            letter-spacing: 1px;
+        }
+        
+        @media (max-width: 768px) {
+            .slide { padding: 3rem 1.5rem; }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.8rem; }
+            p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="slide cover active">
+    <h1>ALBERTO MACCARI</h1>
+    <p class="subtitle">Private Distortion • Abstract Geometry • Simultaneità Intima</p>
+    <div class="divider"></div>
+    <p style="margin-top: 3rem; font-size: 1rem; color: #e6e3dd;">La Frammentazione dello Spazio e della Percezione</p>
+</div>
+
+<div class="slide">
+    <h2>Una Genealogia della Frammentazione</h2>
+    <div class="divider"></div>
+    <p>La pratica fotografica di Alberto Maccari si dispiega attraverso una <em>genealogia della frammentazione</em> — una investigazione sistematica su come il corpo, lo spazio e la percezione si disgregano, si ricompongono, sfuggono al possesso dello sguardo.</p>
+    <p>Non si tratta di rappresentazione, ma di <em>messa in scena delle condizioni percettive</em>. Ogni opera — dal corpo distorto attraverso il vetro alle forme geometriche pure ai vuoti dell'installazione — nega la totalità. L'intimità non risiede nella rivelazione, ma nella frattura.</p>
+</div>
+
+<div class="slide">
+    <h2>Private Distortion</h2>
+    <div class="divider"></div>
+    <p>Una serie fotografica che investiga il corpo non come oggetto statico, ma come <em>campo fragile di percezione</em>.</p>
+    <p>La distorsione ottica origina dal comportamento della luce attraverso il vetro — rifrazione come fenomeno fisico e concettuale simultaneamente. Il corpo fotografato frammentato, moltiplicato, impossibile da catturare in una sola visione.</p>
+    <p>L'intimità emerge dalla <em>impossibilità di accesso</em> — lo spettatore deve rallentare, ricostruire, rinunciare alla presa sicura.</p>
+</div>
+
+<div class="slide">
+    <h2>Il Corpo Frammentato</h2>
+    <div class="divider"></div>
+    <p>La rifrazione ottica del vetro produce una decomposizione sistematica della figura umana. Non è casualità estetica, bensì <em>logica interna di frammentazione</em>.</p>
+    <p>Il corpo non appare mai intero. Fluttua tra visibilità e sparizione, resistendo alla certezza dello sguardo. Questa instabilità è il contenuto dell'opera: <em>la percezione come processo, non come istantanea</em>.</p>
+</div>
+
+<div class="slide">
+    <h2>Abstract Geometry</h2>
+    <div class="divider"></div>
+    <p>Da <em>Private Distortion</em> emerge la domanda: cosa rimane quando la rappresentazione è sottratta completamente?</p>
+    <p>Le forme geometriche pure non sono astrazione del corpo, ma astrazione <em>della percezione del corpo</em>. Sono ciò che rimane quando togli tutto tranne le linee di forza, le onde di accelerazione.</p>
+    <p>Una continuità diretta con Giacomo Balla: <em>il movimento, l'energia, la dinamica sono i veri soggetti dell'arte</em>.</p>
+</div>
+
+<div class="slide">
+    <h2>Balla e il Futurismo</h2>
+    <div class="divider"></div>
+    <p>Giacomo Balla insegnava che il movimento non può essere catturato nella staticità. La sua tecnica delle <em>"linee di forza"</em> decompone il corpo umano in vibrazioni, accelerazioni, onde simultanee.</p>
+    <p><em>Abstract Geometry</em> continua questa lezione: forme pure che oscillano, si moltiplicano, creano l'illusione di energia perenne.</p>
+    <p>Non rappresentazione del movimento, ma <em>rappresentazione della condizione percettiva del movimento</em>.</p>
+</div>
+
+<div class="slide">
+    <h2>Simultaneità Intima</h2>
+    <div class="divider"></div>
+    <p><em>Simultaneità Intima</em> estende questa ricerca nello spazio fisico. Le forme geometriche appendono alle pareti bianche non come decorazione, ma come <em>campo di forze abitabile</em>.</p>
+    <p>Lo spazio stesso diviene il corpo. Le pareti bianche non sono sfondo neutro, ma partecipanti attivi: riflettono, assorbono, moltiplicano l'energia delle forme.</p>
+    <p>Lo spettatore che cammina nello spazio della mostra <em>non vede mai la stessa opera due volte</em>.</p>
+</div>
+
+<div class="slide">
+    <h2>L'Installazione</h2>
+    <div class="divider"></div>
+    <div class="image-frame">
+        <img src="images/02.jpg" alt="Simultaneità Intima - Installazione 1">
+    </div>
+    <p style="font-size: 0.95rem; color: #999; margin-top: 1.5rem;">Forme geometriche nello spazio — il corpo assente come campo di forze</p>
+</div>
+
+<div class="slide">
+    <div class="image-frame">
+        <img src="images/01.jpg" alt="Simultaneità Intima - Installazione 2">
+    </div>
+    <p style="font-size: 0.95rem; color: #999; margin-top: 1.5rem;">Lo spazio come percezione — simultaneità dinamica</p>
+</div>
+
+<div class="slide">
+    <div class="image-frame">
+        <img src="images/03.jpg" alt="Simultaneità Intima - Installazione 3">
+    </div>
+    <p style="font-size: 0.95rem; color: #999; margin-top: 1.5rem;">Forme e architettura — il dialogo fra opera e spazio</p>
+</div>
+
+<div class="slide">
+    <div class="image-frame">
+        <img src="images/04.jpg" alt="Simultaneità Intima - Installazione 4">
+    </div>
+    <p style="font-size: 0.95rem; color: #999; margin-top: 1.5rem;">L'intimità dalla percezione — ciò che sfugge al possesso</p>
+</div>
+
+<div class="slide">
+    <div class="image-frame">
+        <img src="images/05.jpg" alt="Simultaneità Intima - Installazione 5">
+    </div>
+    <p style="font-size: 0.95rem; color: #999; margin-top: 1.5rem;">Lo sguardo rallentato — abitare lo spazio della forma</p>
+</div>
+
+<div class="slide bg-dark">
+    <h1 style="color: white; font-size: 3rem;">Genealogia e Continuità</h1>
+    <div class="divider"></div>
+    <p style="color: #d4a574; font-style: italic;">L'arte non rappresenta il mondo, mette in scena le condizioni percettive della sua impossibilità.</p>
+    <p style="margin-top: 3rem; color: #d4a574;">albertomaccariphotography.com</p>
+</div>
+
+<div class="nav">
+    <button id="prev" onclick="prevSlide()">&larr;</button>
+    <span class="counter"><span id="current">1</span> / 12</span>
+    <button id="next" onclick="nextSlide()">&rarr;</button>
+</div>
+
+<div class="page-number"><span id="pageNum">01</span></div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+
+    function showSlide(n) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[currentSlide].classList.add('active');
+        document.getElementById('current').innerText = currentSlide + 1;
+        document.getElementById('pageNum').innerText = String(currentSlide + 1).padStart(2, '0');
+        document.getElementById('prev').disabled = currentSlide === 0;
+        document.getElementById('next').disabled = currentSlide === totalSlides - 1;
+    }
+
+    function nextSlide() {
+        if (currentSlide < totalSlides - 1) {
+            currentSlide++;
+            showSlide();
+        }
+    }
+
+    function prevSlide() {
+        if (currentSlide > 0) {
+            currentSlide--;
+            showSlide();
+        }
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    showSlide();
+</script>
+
+</body>
+</html>
