@@ -22,20 +22,22 @@ html{scroll-behavior:smooth;}
 body{font-family:'Archivo',Arial,'Helvetica Neue',Helvetica,sans-serif;background:#ececec;color:var(--ink);}
 
 /* ---------- scrolling sections ---------- */
-.slide{display:flex;align-items:center;justify-content:center;padding:30px 26px 30px 46px;}
+.slide{display:flex;align-items:center;justify-content:center;padding:30px 26px;}
 .frame{width:1280px;height:720px;position:relative;background:#fff;overflow:hidden;flex:0 0 auto;
   transform:scale(var(--s));transform-origin:center center;box-shadow:0 18px 50px rgba(0,0,0,.16);}
 
 /* ---------- left elevator rail ---------- */
-.rail{position:fixed;left:22px;top:80px;bottom:80px;width:4px;z-index:500;}
-.rail .track{position:relative;width:3px;height:100%;background:#dadada;border-radius:3px;}
-.rail .fill{position:absolute;left:0;top:0;width:100%;background:var(--orange);border-radius:3px;height:0%;}
+/* in-frame dynamic elevator (replaces external rail + static spine) */
+.frail{position:absolute;left:49px;top:80px;bottom:34px;width:14px;z-index:6;}
+.frail .ftrack{position:absolute;left:6px;top:0;bottom:0;width:2px;background:#dcdcdc;border-radius:2px;}
+.frail .ffill{position:absolute;left:6px;top:0;width:2px;background:var(--orange);border-radius:2px;height:0;transition:height .15s ease;}
+.frail .dot{position:absolute;left:0;width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid #d2d2d2;box-sizing:border-box;transform:translateY(-50%);transition:background .15s,border-color .15s,transform .15s;}
+.frail .dot.on{background:var(--orange);border-color:var(--orange);}
+.frail .dot.cur{transform:translateY(-50%) scale(1.25);box-shadow:0 0 0 3px rgba(232,83,26,.18);}
 
 /* ---------- shared brand chrome ---------- */
 .wr{position:absolute;top:30px;left:46px;font:800 italic 30px/1 'Archivo',Arial,sans-serif;letter-spacing:-1px;color:var(--ink);}
 .wr i{display:inline-block;width:8px;height:8px;background:var(--orange);margin-left:1px;transform:translateY(2px);}
-.spine{position:absolute;left:57px;top:74px;bottom:30px;width:1px;background:var(--line);}
-.spine::before{content:'';position:absolute;left:-1px;top:0;width:3px;height:48px;background:var(--ink);}
 .ribbon{position:absolute;top:38px;right:48px;background:var(--orange);color:#fff;font:700 13px 'Archivo',Arial,sans-serif;letter-spacing:2px;padding:9px 20px 11px;}
 .ribbon::after{content:'';position:absolute;right:16px;bottom:-9px;border-left:10px solid transparent;border-right:10px solid transparent;border-top:9px solid var(--orange);}
 .foot{position:absolute;bottom:28px;right:54px;font:800 13px 'Archivo',Arial,sans-serif;letter-spacing:.4px;color:var(--ink);}
@@ -161,16 +163,11 @@ body{font-family:'Archivo',Arial,'Helvetica Neue',Helvetica,sans-serif;backgroun
 .close .rabbit{position:absolute;top:48px;right:56px;width:470px;height:auto;}
 
 @media (max-width:680px){
-  .slide{padding:14px 8px 14px 60px;}
-  .rail{left:14px;}
+  .slide{padding:14px 8px 14px 16px;}
 }
 </style>
 </head>
 <body>
-
-<nav class="rail">
-  <div class="track"><div class="fill" id="fill"></div></div>
-</nav>
 
 <!-- 01 COVER -->
 <section class="slide" id="s1">
@@ -187,7 +184,7 @@ body{font-family:'Archivo',Arial,'Helvetica Neue',Helvetica,sans-serif;backgroun
 <!-- 02 BRIEFING -->
 <section class="slide" id="s2">
   <div class="frame">
-    <div class="wr">w<span>r</span><i></i></div><div class="spine"></div>
+    <div class="wr">w<span>r</span><i></i></div><div class="frail"></div>
     <div class="ribbon">BRIEFING</div>
     <div class="foot">BRUSSELS<span>WHITERABBIT</span>.EU</div><div class="pg">02</div>
     <div class="body">
@@ -210,7 +207,7 @@ body{font-family:'Archivo',Arial,'Helvetica Neue',Helvetica,sans-serif;backgroun
 <!-- 03 APPROACH -->
 <section class="slide" id="s3">
   <div class="frame">
-    <div class="wr">w<span>r</span><i></i></div><div class="spine"></div>
+    <div class="wr">w<span>r</span><i></i></div><div class="frail"></div>
     <div class="ribbon">APPROACH</div>
     <div class="foot">BRUSSELS<span>WHITERABBIT</span>.EU</div><div class="pg">03</div>
     <div class="body">
@@ -229,7 +226,7 @@ body{font-family:'Archivo',Arial,'Helvetica Neue',Helvetica,sans-serif;backgroun
 <!-- 04 IDENTITY -->
 <section class="slide" id="s4">
   <div class="frame">
-    <div class="wr">w<span>r</span><i></i></div><div class="spine"></div>
+    <div class="wr">w<span>r</span><i></i></div><div class="frail"></div>
     <div class="ribbon">IDENTITY</div>
     <div class="foot">BRUSSELS<span>WHITERABBIT</span>.EU</div><div class="pg">04</div>
     <div class="body">
@@ -264,7 +261,7 @@ body{font-family:'Archivo',Arial,'Helvetica Neue',Helvetica,sans-serif;backgroun
 <!-- 05 WEBSITE -->
 <section class="slide" id="s5">
   <div class="frame">
-    <div class="wr">w<span>r</span><i></i></div><div class="spine"></div>
+    <div class="wr">w<span>r</span><i></i></div><div class="frail"></div>
     <div class="ribbon">WEBSITE</div>
     <div class="foot">BRUSSELS<span>WHITERABBIT</span>.EU</div><div class="pg">05</div>
     <div class="body">
@@ -298,7 +295,7 @@ body{font-family:'Archivo',Arial,'Helvetica Neue',Helvetica,sans-serif;backgroun
 <!-- 05b COLLABORATION -->
 <section class="slide" id="s5b">
   <div class="frame">
-    <div class="wr">w<span>r</span><i></i></div><div class="spine"></div>
+    <div class="wr">w<span>r</span><i></i></div><div class="frail"></div>
     <div class="ribbon">COLLABORATION</div>
     <div class="foot">BRUSSELS<span>WHITERABBIT</span>.EU</div><div class="pg">06</div>
     <div class="body">
@@ -331,7 +328,7 @@ body{font-family:'Archivo',Arial,'Helvetica Neue',Helvetica,sans-serif;backgroun
 <!-- 06 TIMELINE -->
 <section class="slide" id="s6">
   <div class="frame">
-    <div class="wr">w<span>r</span><i></i></div><div class="spine"></div>
+    <div class="wr">w<span>r</span><i></i></div><div class="frail"></div>
     <div class="ribbon">TIMELINE</div>
     <div class="foot">BRUSSELS<span>WHITERABBIT</span>.EU</div><div class="pg">07</div>
     <div class="body">
@@ -353,7 +350,7 @@ body{font-family:'Archivo',Arial,'Helvetica Neue',Helvetica,sans-serif;backgroun
 <!-- 07 CREDENTIALS -->
 <section class="slide" id="s7">
   <div class="frame">
-    <div class="wr">w<span>r</span><i></i></div><div class="spine"></div>
+    <div class="wr">w<span>r</span><i></i></div><div class="frail"></div>
     <div class="ribbon">CREDENTIALS</div>
     <div class="foot">BRUSSELS<span>WHITERABBIT</span>.EU</div><div class="pg">08</div>
     <div class="body">
@@ -374,7 +371,7 @@ body{font-family:'Archivo',Arial,'Helvetica Neue',Helvetica,sans-serif;backgroun
 <!-- 08 TEAM -->
 <section class="slide" id="s8">
   <div class="frame">
-    <div class="wr">w<span>r</span><i></i></div><div class="spine"></div>
+    <div class="wr">w<span>r</span><i></i></div><div class="frail"></div>
     <div class="ribbon">TEAM</div>
     <div class="foot">BRUSSELS<span>WHITERABBIT</span>.EU</div><div class="pg">09</div>
     <div class="body">
@@ -404,7 +401,7 @@ body{font-family:'Archivo',Arial,'Helvetica Neue',Helvetica,sans-serif;backgroun
 <!-- 09 INVESTMENT -->
 <section class="slide" id="s9">
   <div class="frame">
-    <div class="wr">w<span>r</span><i></i></div><div class="spine"></div>
+    <div class="wr">w<span>r</span><i></i></div><div class="frail"></div>
     <div class="ribbon">ESTIMATION</div>
     <div class="foot">BRUSSELS<span>WHITERABBIT</span>.EU</div><div class="pg">10</div>
     <div class="body">
@@ -438,7 +435,7 @@ body{font-family:'Archivo',Arial,'Helvetica Neue',Helvetica,sans-serif;backgroun
 <!-- 10 OPTIONAL -->
 <section class="slide" id="s10">
   <div class="frame">
-    <div class="wr">w<span>r</span><i></i></div><div class="spine"></div>
+    <div class="wr">w<span>r</span><i></i></div><div class="frail"></div>
     <div class="ribbon">OPTIONAL</div>
     <div class="foot">BRUSSELS<span>WHITERABBIT</span>.EU</div><div class="pg">11</div>
     <div class="body">
@@ -466,7 +463,7 @@ body{font-family:'Archivo',Arial,'Helvetica Neue',Helvetica,sans-serif;backgroun
 <!-- 11 CLOSING -->
 <section class="slide" id="s11">
   <div class="frame close">
-    <div class="wr">w<span>r</span><i></i></div><div class="spine"></div>
+    <div class="wr">w<span>r</span><i></i></div><div class="frail"></div>
     <div class="foot">BRUSSELS<span>WHITERABBIT</span>.EU</div><div class="pg">12</div>
     <img class="rabbit" src="data:image/png;base64,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" alt="White Rabbit">
     <div class="body">
@@ -486,8 +483,23 @@ body{font-family:'Archivo',Arial,'Helvetica Neue',Helvetica,sans-serif;backgroun
 const root=document.documentElement;
 function fit(){const s=Math.min((window.innerWidth-80)/1280,(window.innerHeight-30)/720);root.style.setProperty('--s',Math.min(s,1));}
 window.addEventListener('resize',fit);fit();
-const fill=document.getElementById('fill');
-function prog(){const hh=document.documentElement.scrollHeight-window.innerHeight;const p=hh>0?Math.min(window.scrollY/hh,1):0;fill.style.height=(p*100)+'%';}
+// build the in-frame elevator (one dot per slide) inside every .frail
+const SLIDES=document.querySelectorAll('.slide').length;
+const RAILS=[...document.querySelectorAll('.frail')].map(r=>{
+  r.innerHTML='<div class="ftrack"></div><div class="ffill"></div>';
+  const ff=r.querySelector('.ffill'), dots=[];
+  for(let i=0;i<SLIDES;i++){const d=document.createElement('span');d.className='dot';d.style.top=(SLIDES>1?i/(SLIDES-1)*100:0)+'%';r.appendChild(d);dots.push(d);}
+  return {ff,dots};
+});
+function prog(){
+  const hh=document.documentElement.scrollHeight-window.innerHeight;
+  const p=hh>0?Math.min(Math.max(window.scrollY/hh,0),1):0;
+  const cur=Math.round(p*(SLIDES-1));
+  RAILS.forEach(({ff,dots})=>{
+    ff.style.height=(p*100)+'%';
+    dots.forEach((d,i)=>{d.classList.toggle('on',i<=cur);d.classList.toggle('cur',i===cur);});
+  });
+}
 window.addEventListener('scroll',prog,{passive:true});prog();
 document.querySelectorAll('.pttl.acc').forEach(el=>{function t(){el.classList.toggle('open');var b=el.nextElementSibling;if(b&&b.classList.contains('pbody'))b.classList.toggle('open');}el.addEventListener('click',t);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();t();}});});
 </script>
